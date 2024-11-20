@@ -1,6 +1,6 @@
 // Liste des films
 const movies = [
-    { title: "cacaTerrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao", },
+    { title: "Terrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao", },
     { title: "Avatar", img: "https://i.ibb.co/LQgjGTv/image.jpg", src: "https://vidhidehub.com/embed/i581mc3sxmao", },
     { title: "Cars 2", img: "https://i.ibb.co/hFHYMKy/image.png", src: "https://vidhidehub.com/embed/ih2wdzg2dmek" },
     { title: "Cars 1", img: "https://i.ibb.co/C5C73BZ/image.png", src: "https://vidhidehub.com/embed/en0xnvdz2fb9" },
@@ -13,13 +13,13 @@ const movies = [
     { title: "Encanto", img: "https://i.ibb.co/LQGBtGY/image.png", src: "https://dhtpre.com/embed/rf22u7ikko28" },
     { title: "La belle et la bête le film", img: "https://i.ibb.co/nw1JfMp/image.png", src: "https://dhtpre.com/embed/1oxre4vli30i" },
     { title: "Les Choristes", img: "https://i.ibb.co/zNDYrVd/image.png", src: "https://dhtpre.com/embed/1293fhkibvij" },
-    { title: "Le Royaume de Naya", img: "https://i.ibb.co/VWMWBz0/image.png", src: "https://dhtpre.com/embed/pv60n2fbq63y", new: true },
-    { title: "Terrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao", new: true },
-    { title: "Terrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao", new: true },
-    { title: "Terrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao", new: true },
-    { title: "Terrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao", new: true },
-    { title: "Terrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao", new: true },
-    { title: "Terrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao", new: true },
+    { title: "Le Royaume de Naya", img: "https://i.ibb.co/VWMWBz0/image.png", src: "https://dhtpre.com/embed/pv60n2fbq63y",},
+    { title: "Caca", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao", new: true },
+    { title: "Terrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao" },
+    { title: "Terrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao" },
+    { title: "Terrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao"},
+    { title: "Terrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao" },
+    { title: "Terrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao" },
   ];
 
 // Références des éléments
