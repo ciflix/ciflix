@@ -1,23 +1,20 @@
-/* Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Global Styles */
+/* Global styles */
 body {
     font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
     background: linear-gradient(135deg, #2e005e, #3c008c);
     color: #fff;
+    display: flex;
     height: 100vh;
     overflow: hidden;
 }
 
-/* Container */
+/* Container layout */
 .container {
     display: flex;
     height: 100%;
+    width: 100%;
 }
 
 /* Sidebar */
@@ -25,6 +22,10 @@ body {
     width: 250px;
     background-color: #1c0033;
     padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     transition: all 0.3s ease;
 }
 
@@ -32,40 +33,68 @@ body {
     width: 0;
     padding: 0;
     overflow: hidden;
+    box-shadow: none;
 }
 
 .sidebar h2 {
+    font-size: 1.8em;
     color: #8e4fff;
+    text-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
     margin-bottom: 20px;
+    transition: opacity 0.3s ease;
 }
 
-.sidebar ul {
+.sidebar.hidden h2,
+.sidebar.hidden nav ul {
+    display: none;
+}
+
+.sidebar nav ul {
     list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
 }
 
-.sidebar ul li a {
-    color: white;
+.sidebar nav ul li {
+    margin: 10px 0;
+}
+
+.sidebar nav ul li a {
     text-decoration: none;
+    color: #fff;
+    font-size: 1.2em;
     padding: 10px;
     display: block;
-    border-radius: 5px;
-    margin: 5px 0;
+    text-align: center;
+    border-radius: 8px;
+    transition: background-color 0.3s;
 }
 
-.sidebar ul li a:hover {
-    background: #8e4fff;
+.sidebar nav ul li a:hover {
+    background-color: #8e4fff;
+    color: #fff;
 }
 
 /* Toggle Button */
 .toggle-btn {
+    background-color: #8e4fff;
+    color: white;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
     position: absolute;
     top: 20px;
     left: 20px;
-    background: #8e4fff;
-    color: white;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
+    z-index: 1000;
+}
+
+.toggle-btn:hover {
+    transform: scale(1.1);
 }
 
 /* Main Content */
@@ -73,6 +102,19 @@ body {
     flex: 1;
     overflow-y: auto;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: margin-left 0.3s ease;
+}
+
+.main-content.hidden {
+    margin-left: 0;
+}
+
+/* Search Bar */
+.search-bar {
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 .search-bar input {
@@ -80,26 +122,37 @@ body {
     padding: 10px;
     border-radius: 25px;
     border: none;
-    font-size: 1em;
-    margin-bottom: 20px;
+    font-size: 1.2em;
+    color: #333;
+    outline: none;
+    transition: box-shadow 0.3s ease;
 }
 
+.search-bar input:focus {
+    box-shadow: 0 0 15px #8e4fff;
+}
+
+/* Movie Grid */
 .movies-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
+    justify-items: center;
+    width: 100%;
 }
 
 .movie-card {
-    background: #2e005e;
-    border-radius: 10px;
+    position: relative; /* Important pour positionner le badge */
+    background-color: #2e005e;
+    border-radius: 15px;
     overflow: hidden;
-    text-align: center;
-    transition: transform 0.3s;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .movie-card:hover {
     transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
 }
 
 .movie-card img {
@@ -109,21 +162,53 @@ body {
 }
 
 .movie-card h3 {
+    text-align: center;
+    padding: 10px;
+    font-size: 1.2em;
     color: #8e4fff;
-    margin: 10px 0;
 }
 
 .movie-card button {
-    background: #8e4fff;
-    color: white;
-    padding: 10px;
+    background-color: #8e4fff;
+    color: #fff;
     border: none;
+    padding: 10px 15px;
+    margin: 10px;
+    border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .movie-card button:hover {
-    background: #6c00cc;
+    background-color: #3c008c;
 }
+
+/* Badge "Nouveau" */
+.movie-card .new-badge {
+    position: absolute; /* Pour s'assurer qu'il se place sur l'image */
+    top: 10px;
+    left: 10px;
+    background-color: #ff4f4f;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    z-index: 10; /* S'assurer qu'il est au-dessus de tout */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Correction pour Chrome : rendre le badge indépendant des problèmes d'image */
+.movie-card {
+    position: relative; /* S'assurer que les éléments enfants comme le badge restent positionnés par rapport à la carte */
+    overflow: hidden; /* Prévenir les débordements */
+}
+
+
 
 /* Modal */
 .modal {
@@ -139,10 +224,209 @@ body {
 }
 
 .modal-content {
-    background: #1c0033;
+    background-color: #1c0033;
+    border-radius: 15px;
     padding: 20px;
-    border-radius: 10px;
+    width: 70%;
+    max-width: 800px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.9);
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Global styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #004d40, #1b5e20); /* Vert doux et élégant */
+    color: #f0f0f0;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Container layout */
+.container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #00251a; /* Vert foncé */
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.sidebar.hidden {
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: none;
+}
+
+.sidebar h2 {
+    font-size: 1.8em;
+    color: #ffcc80; /* Or doux */
+    text-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.sidebar nav ul li {
+    margin: 10px 0;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: #f0f0f0;
+    font-size: 1.2em;
+    padding: 10px;
+    display: block;
     text-align: center;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.sidebar nav ul li a:hover {
+    background-color: #ff5722; /* Orange vif */
+    color: #fff;
+}
+
+/* Toggle Button */
+.toggle-btn {
+    background-color: #ffcc80; /* Or doux */
+    color: white;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.toggle-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: margin-left 0.3s ease;
+}
+
+.main-content.hidden {
+    margin-left: 0;
+}
+
+/* Search Bar */
+.search-bar {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.search-bar input {
+    width: 60%;
+    padding: 10px;
+    border-radius: 25px;
+    border: none;
+    font-size: 1.2em;
+    color: #333;
+    outline: none;
+    transition: box-shadow 0.3s ease;
+}
+
+.search-bar input:focus {
+    box-shadow: 0 0 15px #ffcc80;
+}
+
+/* Movie Grid */
+.movies-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    width: 100%;
+}
+
+.movie-card {
+    position: relative;
+    background-color: #004d40; /* Vert doux */
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+}
+
+.movie-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.movie-card h3 {
+    text-align: center;
+    padding: 10px;
+    font-size: 1.2em;
+    color: #ffcc80;
+}
+
+.movie-card button {
+    background-color: #ff5722; /* Orange vif */
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.movie-card button:hover {
+    background-color: #ffa726; /* Orange plus doux */
+}
+
+/* Badge "Nouveau" */
+.movie-card .new-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #ff5722;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Film Request Box */
@@ -150,36 +434,118 @@ body {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: #ffcc80;
+    background-color: #ffcc80; /* Or doux */
     color: #333;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
 }
 
+.film-request-box button {
+    background-color: #ffcc80;
+    color: #333;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.film-request-box button:hover {
+    background-color: #ff5722;
+    color: white;
+}
+
+/* Film Request Modal */
 .film-request-modal {
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #004d40;
+    background-color: #004d40;
     padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 350px;
+    max-width: 90%;
+    z-index: 9999;
     color: white;
-    border-radius: 10px;
 }
 
-/* Snow Animation */
-.snowflake {
-    position: absolute;
-    top: -10px;
-    font-size: 1.5em;
-    color: white;
-    opacity: 0.8;
-    animation: snow linear infinite;
+.film-request-modal iframe {
+    width: 100%;
+    height: 300px;
+    border: none;
+    border-radius: 8px;
 }
 
+.film-request-modal h3 {
+    text-align: center;
+    color: #ffcc80;
+}
+
+.film-request-modal button {
+    background-color: #ffcc80;
+    color: #333;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.film-request-modal button:hover {
+    background-color: #ff5722;
+    color: white;
+}
+/* Snowflakes CSS */
 @keyframes snow {
     to {
         transform: translateY(100vh);
     }
+}
+
+.snowflake {
+    position: absolute;
+    top: -10px;
+    font-size: 1.5em;
+    color: #fff;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: snow linear infinite;
+    z-index: 10000;
+}
+
+/* Size and Speed Variations */
+.snowflake:nth-child(1) {
+    left: 5%;
+    animation-duration: 7s;
+    animation-delay: 0s;
+    font-size: 1em;
+}
+.snowflake:nth-child(2) {
+    left: 20%;
+    animation-duration: 6s;
+    animation-delay: 1s;
+    font-size: 1.2em;
+}
+.snowflake:nth-child(3) {
+    left: 50%;
+    animation-duration: 8s;
+    animation-delay: 2s;
+    font-size: 0.8em;
+}
+.snowflake:nth-child(4) {
+    left: 80%;
+    animation-duration: 10s;
+    animation-delay: 3s;
+    font-size: 1.5em;
+}
+.snowflake:nth-child(5) {
+    left: 70%;
+    animation-duration: 9s;
+    animation-delay: 4s;
+    font-size: 1.3em;
 }

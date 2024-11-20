@@ -31,21 +31,7 @@
 
             <!-- Movie Grid -->
             <div class="movies-container" id="moviesContainer">
-                <div class="movie-card">
-                    <img src="https://i.ibb.co/CBpcPKf/image.png" alt="Terrifier 3">
-                    <h3>Terrifier 3</h3>
-                    <button onclick="openModal('Terrifier 3', 'https://vidhidehub.com/embed/i581mc3sxmao')">Regarder</button>
-                </div>
-                <div class="movie-card">
-                    <img src="https://i.ibb.co/LQgjGTv/image.jpg" alt="Avatar">
-                    <h3>Avatar</h3>
-                    <button onclick="openModal('Avatar', 'https://vidhidehub.com/embed/i581mc3sxmao')">Regarder</button>
-                </div>
-                <div class="movie-card">
-                    <img src="https://i.ibb.co/hFHYMKy/image.png" alt="Cars 2">
-                    <h3>Cars 2</h3>
-                    <button onclick="openModal('Cars 2', 'https://vidhidehub.com/embed/ih2wdzg2dmek')">Regarder</button>
-                </div>
+                <!-- Les films seront générés dynamiquement -->
             </div>
         </main>
     </div>
@@ -58,18 +44,19 @@
             <button class="close-btn" onclick="closeModal()">Fermer</button>
         </div>
     </div>
-
-    <!-- Film Request -->
+    <!-- Boîte à film (Popup) -->
     <div class="film-request-box">
         <p>Vous ne trouvez pas votre film ? <button class="film-request-button">Faites votre demande</button></p>
     </div>
 
+    <!-- Modal de demande de film -->
     <div class="film-request-modal" id="filmRequestModal">
         <h3>Demander un Film</h3>
+        <!-- Framaforms iframe -->
         <iframe src="https://framaforms.org/demande-de-film-1732050801" frameborder="0"></iframe>
         <button class="close-btn" onclick="closeFilmRequestModal()">Fermer</button>
     </div>
 
-    <script src="scripts.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
