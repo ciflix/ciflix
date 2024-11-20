@@ -86,4 +86,14 @@ document.addEventListener("DOMContentLoaded", function () {
             // Ajouter le flocon au tableau
             snowflakes.push(snowflake);
 
-            // Retirer le fl
+            // Retirer le flocon une fois l'animation terminée
+            snowflake.addEventListener('animationend', () => {
+                snowflakes = snowflakes.filter(flake => flake !== snowflake);
+                snowflake.remove();
+            });
+        }
+    }
+
+    // Générer des flocons à intervalles réguliers
+    setInterval(createSnowflake, 200);
+});
