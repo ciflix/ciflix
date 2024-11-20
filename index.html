@@ -24,15 +24,16 @@
 
         <!-- Main Content -->
         <main class="main-content">
+            <!-- Search Bar -->
             <div class="search-bar">
                 <input type="text" id="searchInput" placeholder="Rechercher un film...">
             </div>
 
+            <!-- Movie Grid -->
             <div class="movies-container" id="moviesContainer">
-                <!-- Exemples de cartes de films -->
                 <div class="movie-card">
                     <img src="https://i.ibb.co/CBpcPKf/image.png" alt="Terrifier 3">
-                    <h3>Caca Terrifier 3</h3>
+                    <h3>Terrifier 3</h3>
                     <button onclick="openModal('Terrifier 3', 'https://vidhidehub.com/embed/i581mc3sxmao')">Regarder</button>
                 </div>
                 <div class="movie-card">
@@ -58,18 +59,17 @@
         </div>
     </div>
 
-    <!-- Boîte à requêtes -->
+    <!-- Film Request -->
     <div class="film-request-box">
         <p>Vous ne trouvez pas votre film ? <button class="film-request-button">Faites votre demande</button></p>
     </div>
 
-    <!-- Modal de demande -->
     <div class="film-request-modal" id="filmRequestModal">
         <h3>Demander un Film</h3>
         <iframe src="https://framaforms.org/demande-de-film-1732050801" frameborder="0"></iframe>
         <button class="close-btn" onclick="closeFilmRequestModal()">Fermer</button>
     </div>
 
-    <script src="script.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>
