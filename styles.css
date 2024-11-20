@@ -1,67 +1,77 @@
-/* styles.css */
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 /* Global Styles */
 body {
     font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, #004d40, #1b5e20);
+    background: linear-gradient(135deg, #2e005e, #3c008c);
     color: #fff;
-    display: flex;
     height: 100vh;
     overflow: hidden;
 }
 
+/* Container */
 .container {
     display: flex;
     height: 100%;
-    width: 100%;
 }
 
 /* Sidebar */
 .sidebar {
     width: 250px;
-    background-color: #00251a;
+    background-color: #1c0033;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: width 0.3s;
+    transition: all 0.3s ease;
 }
 
 .sidebar.hidden {
     width: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 .sidebar h2 {
-    color: #ffcc80;
+    color: #8e4fff;
+    margin-bottom: 20px;
 }
 
 .sidebar ul {
     list-style: none;
-    padding: 0;
-}
-
-.sidebar ul li {
-    margin: 10px 0;
 }
 
 .sidebar ul li a {
-    color: #fff;
+    color: white;
     text-decoration: none;
     padding: 10px;
     display: block;
     border-radius: 5px;
+    margin: 5px 0;
 }
 
 .sidebar ul li a:hover {
-    background-color: #ff5722;
+    background: #8e4fff;
+}
+
+/* Toggle Button */
+.toggle-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #8e4fff;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
 }
 
 /* Main Content */
 .main-content {
     flex: 1;
+    overflow-y: auto;
     padding: 20px;
 }
 
@@ -70,6 +80,8 @@ body {
     padding: 10px;
     border-radius: 25px;
     border: none;
+    font-size: 1em;
+    margin-bottom: 20px;
 }
 
 .movies-container {
@@ -79,24 +91,38 @@ body {
 }
 
 .movie-card {
-    background-color: #004d40;
-    border-radius: 15px;
+    background: #2e005e;
+    border-radius: 10px;
     overflow: hidden;
     text-align: center;
     transition: transform 0.3s;
 }
 
+.movie-card:hover {
+    transform: scale(1.05);
+}
+
 .movie-card img {
     width: 100%;
     height: 300px;
+    object-fit: cover;
+}
+
+.movie-card h3 {
+    color: #8e4fff;
+    margin: 10px 0;
 }
 
 .movie-card button {
-    background-color: #ff5722;
-    border: none;
-    color: #fff;
+    background: #8e4fff;
+    color: white;
     padding: 10px;
+    border: none;
     cursor: pointer;
+}
+
+.movie-card button:hover {
+    background: #6c00cc;
 }
 
 /* Modal */
@@ -111,19 +137,49 @@ body {
     justify-content: center;
     align-items: center;
 }
+
 .modal-content {
-    background: #00251a;
+    background: #1c0033;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
 }
 
+/* Film Request Box */
 .film-request-box {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #ffcc80;
+    background: #ffcc80;
+    color: #333;
     padding: 10px;
-    border-radius: 8px;
-    cursor: pointer;
+    border-radius: 5px;
+}
+
+.film-request-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #004d40;
+    padding: 20px;
+    color: white;
+    border-radius: 10px;
+}
+
+/* Snow Animation */
+.snowflake {
+    position: absolute;
+    top: -10px;
+    font-size: 1.5em;
+    color: white;
+    opacity: 0.8;
+    animation: snow linear infinite;
+}
+
+@keyframes snow {
+    to {
+        transform: translateY(100vh);
+    }
 }
