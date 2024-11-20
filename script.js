@@ -1,6 +1,6 @@
 // Liste des films
 const movies = [
-    { title: "Terrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao", },
+    { title: "cacaTerrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao", },
     { title: "Avatar", img: "https://i.ibb.co/LQgjGTv/image.jpg", src: "https://vidhidehub.com/embed/i581mc3sxmao", },
     { title: "Cars 2", img: "https://i.ibb.co/hFHYMKy/image.png", src: "https://vidhidehub.com/embed/ih2wdzg2dmek" },
     { title: "Cars 1", img: "https://i.ibb.co/C5C73BZ/image.png", src: "https://vidhidehub.com/embed/en0xnvdz2fb9" },
