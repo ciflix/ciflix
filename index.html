@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streaming</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <button class="toggle-btn" id="toggleSidebar">☰</button>
+            <h2>Streaming</h2>
+            <nav>
+                <ul>
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#">Films</a></li>
+                    <li><a href="#">Séries</a></li>
+                    <li><a href="#">Favoris</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Rechercher un film...">
+            </div>
+
+            <!-- Movie Grid -->
+            <div class="movies-container" id="moviesContainer">
+                <!-- Les films seront générés dynamiquement -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="movieModal">
+        <div class="modal-content">
+            <h2 id="movieTitle"></h2>
+            <iframe id="movieSource" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>
+            <button class="close-btn" onclick="closeModal()">Fermer</button>
+        </div>
+    </div>
+    <!-- Boîte à film (Popup) -->
+    <div class="film-request-box">
+        <p>Vous ne trouvez pas votre film ? <button class="film-request-button">Faites votre demande</button></p>
+    </div>
+
+    <!-- Modal de demande de film -->
+    <div class="film-request-modal" id="filmRequestModal">
+        <h3>Demander un Film</h3>
+        <!-- Framaforms iframe -->
+        <iframe src="https://framaforms.org/demande-de-film-1732050801" frameborder="0"></iframe>
+        <button class="close-btn" onclick="closeFilmRequestModal()">Fermer</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
