@@ -44,10 +44,17 @@
             <button class="close-btn" onclick="closeModal()">Fermer</button>
         </div>
     </div>
-    <!-- Boîte à film (Popup) -->
     <div class="film-request-box">
-        <p>Vous ne trouvez pas votre film ? <button class="film-request-button">Faites votre demande</button></p>
-    </div>
+    <button>Demander un film</button>
+</div>
+
+<div class="film-request-modal" style="display: none;">
+    <h3>Demande de film</h3>
+    <input type="text" id="movie-name-input" placeholder="Nom du film..." />
+    <button id="send-request-button">Envoyer</button>
+    <button class="close-modal-button">Fermer</button>
+</div>
+
 
     <!-- Modal de demande de film -->
     <div class="film-request-modal" id="filmRequestModal">
