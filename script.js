@@ -177,3 +177,75 @@ document.addEventListener("DOMContentLoaded", function () {
     // Générer des flocons à intervalles réguliers
     setInterval(createSnowflake, 200);  // Créer un nouveau flocon toutes les 200ms
 });
+
+// Assurez-vous que le DOM est chargé avant d'exécuter ce script
+document.addEventListener('DOMContentLoaded', () => {
+    // Bouton pour ouvrir le modal
+    const openRequestModalButton = document.querySelector('.film-request-box button');
+
+    // Modal de demande de film
+    const requestModal = document.querySelector('.film-request-modal');
+
+    // Bouton de fermeture du modal
+    const closeRequestModalButton = requestModal.querySelector('.close-modal-button');
+
+    // Champ d'entrée pour le nom du film
+    const movieNameInput = requestModal.querySelector('#movie-name-input'); // Assurez-vous d'avoir un champ avec cet ID dans votre HTML
+
+    // Bouton d'envoi de la demande
+    const sendRequestButton = requestModal.querySelector('#send-request-button'); // Ajoutez un bouton avec cet ID dans votre HTML
+
+    // Webhook Discord URL (remplacez par l'URL de votre webhook Discord)
+    const discordWebhookUrl = 'https://discord.com/api/webhooks/your_webhook_id/your_webhook_token';
+
+    // Ouvrir le modal
+    openRequestModalButton.addEventListener('click', () => {
+        requestModal.style.display = 'block';
+    });
+
+    // Fermer le modal
+    closeRequestModalButton.addEventListener('click', () => {
+        requestModal.style.display = 'none';
+        movieNameInput.value = ''; // Réinitialiser le champ d'entrée
+    });
+
+    // Envoyer la demande au webhook Discord
+    sendRequestButton.addEventListener('click', () => {
+        const movieName = movieNameInput.value.trim();
+
+        if (!movieName) {
+            alert('Veuillez entrer le nom du film.');
+            return;
+        }
+
+        // Structure du message à envoyer
+        const payload = {
+            content: `🎥 **Demande de film :** ${movieName}`,
+            username: 'Demande de Film Bot', // Nom affiché dans Discord
+            avatar_url: 'https://example.com/avatar.png', // URL d'un avatar, optionnel
+        };
+
+        // Envoi de la requête POST
+        fetch(discordWebhookUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('La demande de film a été envoyée avec succès !');
+                requestModal.style.display = 'none'; // Fermer le modal
+                movieNameInput.value = ''; // Réinitialiser le champ d'entrée
+            } else {
+                alert('Erreur lors de l\'envoi de la demande. Veuillez réessayer.');
+            }
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            alert('Une erreur s\'est produite. Veuillez vérifier votre connexion.');
+        });
+    });
+});
+
