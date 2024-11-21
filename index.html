@@ -43,17 +43,23 @@
             <iframe id="movieSource" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>
             <button class="close-btn" onclick="closeModal()">Fermer</button>
         </div>
-    <div class="film-request-box">
-    <button>Demander un film</button>
+    </div>
+    <!-- Modal de demande de film -->
+<div class="film-request-modal" id="filmRequestModal">
+    <h3>Demander un Film</h3>
+    <form id="filmRequestForm">
+        <label for="filmTitle">Titre du film :</label>
+        <input type="text" id="filmTitle" name="filmTitle" required>
+        <label for="filmDetails">Détails (optionnel) :</label>
+        <textarea id="filmDetails" name="filmDetails" rows="4"></textarea>
+        <button type="submit" class="submit-btn">Envoyer</button>
+    </form>
+    <button class="close-btn" onclick="closeFilmRequestModal()">Fermer</button>
 </div>
 
-<div class="film-request-modal" style="display: none;">
-    <h3>Vous ne trouvez pas votre film? faites une demande de film</h3>
-    <input type="text" id="movie-name-input" placeholder="Nom du film..." />
-    <button id="send-request-button">Envoyer</button>
-    <button class="close-modal-button">Fermer</button>
+<div class="film-request-box">
+    <p>Vous ne trouvez pas votre film ? <button class="film-request-button">Faites votre demande</button></p>
 </div>
-
 
     <script src="script.js"></script>
 </body>

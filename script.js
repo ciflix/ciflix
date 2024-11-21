@@ -1,7 +1,7 @@
 // Liste des films
 const movies = [
-    { title: "Terrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao", },
-    { title: "Avatar", img: "https://i.ibb.co/LQgjGTv/image.jpg", src: "https://vidhidehub.com/embed/i581mc3sxmao", },
+    { title: "Terrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao", new: true },
+    { title: "Avatar", img: "https://i.ibb.co/LQgjGTv/image.jpg", src: "https://vidhidehub.com/embed/i581mc3sxmao", new: true },
     { title: "Cars 2", img: "https://i.ibb.co/hFHYMKy/image.png", src: "https://vidhidehub.com/embed/ih2wdzg2dmek" },
     { title: "Cars 1", img: "https://i.ibb.co/C5C73BZ/image.png", src: "https://vidhidehub.com/embed/en0xnvdz2fb9" },
     { title: "Cars 3", img: "https://i.ibb.co/WVfVVnn/image.png", src: "https://vidhidehub.com/embed/ih2wdzg2dmek" },
@@ -13,14 +13,9 @@ const movies = [
     { title: "Encanto", img: "https://i.ibb.co/LQGBtGY/image.png", src: "https://dhtpre.com/embed/rf22u7ikko28" },
     { title: "La belle et la bête le film", img: "https://i.ibb.co/nw1JfMp/image.png", src: "https://dhtpre.com/embed/1oxre4vli30i" },
     { title: "Les Choristes", img: "https://i.ibb.co/zNDYrVd/image.png", src: "https://dhtpre.com/embed/1293fhkibvij" },
-    { title: "Le Royaume de Naya", img: "https://i.ibb.co/VWMWBz0/image.png", src: "https://dhtpre.com/embed/pv60n2fbq63y", new: true },
-    { title: "Terrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao", new: true },
-    { title: "Terrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao", new: true },
-    { title: "Terrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao", new: true },
-    { title: "Terrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao", new: true },
-    { title: "Terrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao", new: true },
-    { title: "Terrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao", new: true },
-  ];
+    { title: "Film 4", img: "remplace par ton image", src: "remplace par ton liens embed" },
+    { title: "Film 5", img: "remplace par ton image", src: "remplace par ton liens embed" }
+];
 
 // Références des éléments
 const sidebar = document.getElementById('sidebar');
@@ -178,74 +173,45 @@ document.addEventListener("DOMContentLoaded", function () {
     setInterval(createSnowflake, 200);  // Créer un nouveau flocon toutes les 200ms
 });
 
-// Assurez-vous que le DOM est chargé avant d'exécuter ce script
-document.addEventListener('DOMContentLoaded', () => {
-    // Bouton pour ouvrir le modal
-    const openRequestModalButton = document.querySelector('.film-request-box button');
+// Webhook Discord
+const discordWebhookURL = "https://discord.com/api/webhooks/1307769219068334232/VFWM308HqGj2naUX32gOyvPBOMKV0sTCPGAYQr4Bwri4KedbpqH-9OETEfgHRRkvgVG8";
 
-    // Modal de demande de film
-    const requestModal = document.querySelector('.film-request-modal');
+// Gestionnaire de soumission du formulaire
+document.getElementById('filmRequestForm').addEventListener('submit', (event) => {
+    event.preventDefault(); // Empêcher le rechargement de la page
 
-    // Bouton de fermeture du modal
-    const closeRequestModalButton = requestModal.querySelector('.close-modal-button');
+    const filmTitle = document.getElementById('filmTitle').value.trim();
+    const filmDetails = document.getElementById('filmDetails').value.trim();
 
-    // Champ d'entrée pour le nom du film
-    const movieNameInput = requestModal.querySelector('#movie-name-input'); // Assurez-vous d'avoir un champ avec cet ID dans votre HTML
+    if (!filmTitle) {
+        alert("Veuillez entrer un titre de film.");
+        return;
+    }
 
-    // Bouton d'envoi de la demande
-    const sendRequestButton = requestModal.querySelector('#send-request-button'); // Ajoutez un bouton avec cet ID dans votre HTML
+    // Préparer les données pour Discord
+    const requestData = {
+        content: `🎥 **Nouvelle demande de film**\n**Titre :** ${filmTitle}\n**Détails :** ${filmDetails || "Aucun détail fourni."}`
+    };
 
-    // Webhook Discord URL (remplacez par l'URL de votre webhook Discord)
-    const discordWebhookUrl = 'https://discord.com/api/webhooks/your_webhook_id/your_webhook_token';
-
-    // Ouvrir le modal
-    openRequestModalButton.addEventListener('click', () => {
-        requestModal.style.display = 'block';
-    });
-
-    // Fermer le modal
-    closeRequestModalButton.addEventListener('click', () => {
-        requestModal.style.display = 'none';
-        movieNameInput.value = ''; // Réinitialiser le champ d'entrée
-    });
-
-    // Envoyer la demande au webhook Discord
-    sendRequestButton.addEventListener('click', () => {
-        const movieName = movieNameInput.value.trim();
-
-        if (!movieName) {
-            alert('Veuillez entrer le nom du film.');
-            return;
+    // Envoyer la demande via fetch
+    fetch(discordWebhookURL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+    })
+    .then(response => {
+        if (response.ok) {
+            alert("Votre demande a été envoyée avec succès !");
+            closeFilmRequestModal();
+            document.getElementById('filmRequestForm').reset();
+        } else {
+            alert("Une erreur s'est produite. Veuillez réessayer.");
         }
-
-        // Structure du message à envoyer
-        const payload = {
-            content: `🎥 **Demande de film :** ${movieName}`,
-            username: 'Demande de Film Bot', // Nom affiché dans Discord
-            avatar_url: 'https://example.com/avatar.png', // URL d'un avatar, optionnel
-        };
-
-        // Envoi de la requête POST
-        fetch(discordWebhookUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
-        })
-        .then(response => {
-            if (response.ok) {
-                alert('La demande de film a été envoyée avec succès !');
-                requestModal.style.display = 'none'; // Fermer le modal
-                movieNameInput.value = ''; // Réinitialiser le champ d'entrée
-            } else {
-                alert('Erreur lors de l\'envoi de la demande. Veuillez réessayer.');
-            }
-        })
-        .catch(error => {
-            console.error('Erreur:', error);
-            alert('Une erreur s\'est produite. Veuillez vérifier votre connexion.');
-        });
+    })
+    .catch(error => {
+        console.error("Erreur lors de l'envoi au webhook Discord :", error);
+        alert("Impossible d'envoyer votre demande. Vérifiez votre connexion.");
     });
 });
-
