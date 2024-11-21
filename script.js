@@ -1,22 +1,3 @@
-// Liste des films
-const movies = [
-    { title: "Terrifier 3", img: "https://i.ibb.co/CBpcPKf/image.png", src: "https://vidhidehub.com/embed/i581mc3sxmao", new: true },
-    { title: "Avatar", img: "https://i.ibb.co/LQgjGTv/image.jpg", src: "https://vidhidehub.com/embed/i581mc3sxmao", new: true },
-    { title: "Cars 2", img: "https://i.ibb.co/hFHYMKy/image.png", src: "https://vidhidehub.com/embed/ih2wdzg2dmek" },
-    { title: "Cars 1", img: "https://i.ibb.co/C5C73BZ/image.png", src: "https://vidhidehub.com/embed/en0xnvdz2fb9" },
-    { title: "Cars 3", img: "https://i.ibb.co/WVfVVnn/image.png", src: "https://vidhidehub.com/embed/ih2wdzg2dmek" },
-    { title: "Oppenheimer", img: "https://i.ibb.co/bg5tDTn/image.png", src: "https://vidhidehub.com/embed/trtnr14ocphf" },
-    { title: "Les crevettes pailletées", img: "https://i.ibb.co/wd5nS7x/image.png", src: "https://vidhidehub.com/embed/lvl6ltynis3s" },
-    { title: "La revanche des crevettes pailletées", img: "https://i.ibb.co/f8Q61Ht/image.png", src: "https://vidhidehub.com/embed/10ko0pxynsyy" },
-    { title: "Olga", img: "https://i.ibb.co/5TcPXr5/image.png", src: "https://vidhidehub.com/embed/mmuimqpmynja" },
-    { title: "Elementaire", img: "https://i.ibb.co/0D6qcG6/image.png", src: "https://dhtpre.com/embed/faos0bmjtrrj" },
-    { title: "Encanto", img: "https://i.ibb.co/LQGBtGY/image.png", src: "https://dhtpre.com/embed/rf22u7ikko28" },
-    { title: "La belle et la bête le film", img: "https://i.ibb.co/nw1JfMp/image.png", src: "https://dhtpre.com/embed/1oxre4vli30i" },
-    { title: "Les Choristes", img: "https://i.ibb.co/zNDYrVd/image.png", src: "https://dhtpre.com/embed/1293fhkibvij" },
-    { title: "Film 4", img: "remplace par ton image", src: "remplace par ton liens embed" },
-    { title: "Film 5", img: "remplace par ton image", src: "remplace par ton liens embed" }
-];
-
 // Références des éléments
 const sidebar = document.getElementById('sidebar');
 const toggleSidebar = document.getElementById('toggleSidebar');
@@ -43,47 +24,16 @@ function toggleNewBadges(shouldHide) {
     });
 }
 
-// Générer les cartes des films
+// Affichage des films en fonction de la recherche
 function displayMovies(filter = "") {
-    moviesContainer.innerHTML = "";
-
-    // Trier les films pour afficher ceux marqués "Nouveau" en haut
-    const sortedMovies = movies.sort((a, b) => (b.new ? 1 : 0) - (a.new ? 1 : 0));
-
-    sortedMovies
-        .filter(movie => movie.title.toLowerCase().includes(filter.toLowerCase()))
-        .forEach(movie => {
-            const movieCard = document.createElement('div');
-            movieCard.className = 'movie-card';
-
-            // Image
-            const img = document.createElement('img');
-            img.src = movie.img;
-            img.alt = movie.title;
-
-            // Titre
-            const title = document.createElement('h3');
-            title.innerText = movie.title;
-
-            // Badge "Nouveau"
-            if (movie.new) {
-                const badge = document.createElement('div');
-                badge.className = 'new-badge';
-                badge.innerText = "Nouveau";
-                movieCard.appendChild(badge);
-            }
-
-            // Bouton
-            const button = document.createElement('button');
-            button.innerText = "Regarder";
-            button.onclick = () => openModal(movie.title, movie.src);
-
-            movieCard.appendChild(img);
-            movieCard.appendChild(title);
-            movieCard.appendChild(button);
-
-            moviesContainer.appendChild(movieCard);
-        });
+    const movieCards = document.querySelectorAll('.movie-card');
+    
+    // Parcourt toutes les cartes et les filtre
+    movieCards.forEach(card => {
+        const title = card.querySelector('h3').innerText.toLowerCase();
+        // Masque ou affiche la carte en fonction de la recherche
+        card.style.display = title.includes(filter.toLowerCase()) ? "block" : "none";
+    });
 }
 
 // Ouvrir la modal
@@ -104,6 +54,15 @@ function closeModal() {
     // Réafficher les badges "Nouveau"
     toggleNewBadges(false);
 }
+
+// Ajouter un écouteur d'événements aux boutons "Regarder"
+document.querySelectorAll('.watch-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const title = button.closest('.movie-card').querySelector('h3').innerText; // Récupère le titre du film
+        const src = button.getAttribute('data-src'); // Récupère la source du film à partir de l'attribut data-src
+        openModal(title, src);
+    });
+});
 
 // Événement de recherche
 searchInput.addEventListener('input', (e) => displayMovies(e.target.value));
